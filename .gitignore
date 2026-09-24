@@ -1,0 +1,22 @@
+# Private runtime data must never enter source control.
+Library/
+**/Library/
+.venv/
+*.app/
+build/
+__pycache__/
+*.pyc
+*.sqlite*
+*.db*
+*.npz
+*.npy
+*.onnx
+*.log
+.env*
+.DS_Store
+*.jpg
+*.jpeg
+*.arw
+*.png
+*.heic
+*.zip
