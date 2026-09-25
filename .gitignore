@@ -20,3 +20,7 @@ __pycache__/
 *.png
 *.heic
 *.zip
+
+# Only reviewed demo screenshots are public. Other images stay ignored.
+!docs/screenshots/demo-gallery.jpg
+!docs/screenshots/demo-preview.jpg

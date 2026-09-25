@@ -14,6 +14,23 @@ I got married. Then came a drive full of photos—and a surprisingly hard questi
 
 Wedding Faces started there. Point it at a folder, let it suggest face groups, review the matches, and export copies for the people you care about. Useful for wedding collections, family archives, and the photo folders you've been meaning to organize.
 
+## See it in action
+
+**Real app interface, fictional demo collection.** These screenshots use AI-generated people and photos with manually reviewed groups. No private photo-library data is shown; this is an interface demonstration, not an accuracy benchmark.
+
+### Browse photos by person
+
+![Wedding Faces gallery with an AI-generated demo collection](docs/screenshots/demo-gallery.jpg)
+
+<details>
+<summary><strong>Preview a photo without leaving the app</strong></summary>
+
+![In-app preview of an AI-generated wedding photograph](docs/screenshots/demo-preview.jpg)
+
+</details>
+
+[Download and reuse the demo screenshots](docs/screenshots/README.md) with their demo disclosure.
+
 ## What it does
 
 | Your collection | What Wedding Faces helps with |
@@ -21,7 +38,7 @@ Wedding Faces started there. Point it at a folder, let it suggest face groups, r
 | Thousands of images across folders | Scan recursively, including external drives |
 | JPG and RAW versions of the same shot | Pair JPG + ARW by filename within each folder |
 | The same person in many photos | Suggest face groups with local recognition |
-| One person split into several groups | Review pairs or batches, with remaining counts |
+| One person split into several groups | Review pairs or batches, select all for the current person, and track remaining counts |
 | Suggestions that need correction | Save skip / different-person decisions and name groups |
 | Photos you want to share | Export copies while leaving originals untouched |
 
@@ -65,15 +82,17 @@ Never share `Library/`, screenshots containing private photos or names, exports,
 python3 scripts/package_source.py
 ```
 
-The packager includes only reviewed paths in `PUBLIC_FILES.json`, rejects symlinks and sensitive file types, and produces a source archive outside this folder. Re-run it after any change; an allowlist limits which files ship but is not a substitute for reviewing their contents.
+The packager accepts only checksum-pinned demo screenshots and reviewed source paths in `PUBLIC_FILES.json`, rejects symlinks and sensitive file types, and produces a source archive outside this folder. Re-run it after any change; an allowlist limits which files ship but is not a substitute for reviewing their contents.
 
 ## Limitations
+
+If macOS asks for Documents or removable-drive access, allow it for the app when needed to read your selected collection and local installation.
 
 One photo folder per catalog. No iPad app, cloud sync, or automatic drive relocation. Photos without detected faces are indexed but not shown in person groups. Automatic grouping is conservative, not guaranteed accurate. Library size grows with thumbnails and face data. Stop scanning before editing groups.
 
 ## Licenses
 
-Application code: MIT. OpenCV SFace model: Apache 2.0. YuNet model: MIT. Their license texts are in `models/`; model weights are downloaded separately. Python dependencies retain their own licenses. No personal catalog, photo samples, or research-only model weights are distributed.
+Application code: MIT. OpenCV SFace model: Apache 2.0. YuNet model: MIT. Their license texts are in `models/`; model weights are downloaded separately. Python dependencies retain their own licenses. No personal catalog, private photographs, or research-only model weights are distributed. Demo screenshot provenance is documented in `docs/screenshots/README.md`.
 
 ## Help shape the next version
 

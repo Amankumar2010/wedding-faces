@@ -18,7 +18,8 @@ class PrivacyTests(unittest.TestCase):
   self.assertTrue(files)
   for name in files:
    self.assertFalse(set(Path(name).parts)&{'Library','.venv','work','.git','build'})
-   self.assertNotIn(Path(name).suffix.lower(),{'.jpg','.arw','.png','.sqlite','.npz','.onnx'})
+   self.assertNotIn(Path(name).suffix.lower(),{'.arw','.sqlite','.npz','.onnx'})
+   if Path(name).suffix in ('.png','.jpg'):self.assertIn(name,json.loads((ROOT/'PUBLIC_IMAGES.json').read_text()))
  def test_pair_inventory_keeps_folders_separate(self):
   with tempfile.TemporaryDirectory() as tmp:
    base=Path(tmp)

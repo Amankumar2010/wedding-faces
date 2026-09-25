@@ -23,6 +23,7 @@ func engine(_ args:[String]) throws -> Data {
     p.standardInput=FileHandle.nullDevice
     p.qualityOfService = .userInitiated
     try p.run()
+    try? out.fileHandleForWriting.close()
     let data=out.fileHandleForReading.readDataToEndOfFile(); p.waitUntilExit()
     if p.terminationStatus != 0 {
         let obj=(try? JSONSerialization.jsonObject(with:data)) as? [String:Any]
@@ -171,7 +172,7 @@ func engine(_ args:[String]) throws -> Data {
 struct Thumb:View {
     let path:String
     var body:some View {
-        if let img=NSImage(contentsOfFile:path) {Image(nsImage:img).resizable().scaledToFill()}
+        if let img=NSImage(contentsOfFile:path) {GeometryReader {geometry in Image(nsImage:img).resizable().scaledToFill().frame(width:geometry.size.width,height:geometry.size.height).clipped()}}
         else {Rectangle().fill(Color.gray.opacity(0.15)).overlay(Image(systemName:"photo"))}
     }
 }
@@ -313,6 +314,12 @@ struct BatchPersonView:View {
                 VStack(alignment:.leading) {Text(batch.name).font(.title3.bold());Text("\(batch.count) photos · \(batch.items.count) possible groups").foregroundStyle(.secondary)}
                 Spacer()
                 ForEach(batch.thumbs,id:\.self){Thumb(path:$0).frame(width:76,height:76).clipped().cornerRadius(10)}
+            }
+            HStack(spacing:12) {
+                Button("Select all") {m.batchSelected.formUnion(batch.items.map(\.id))}.disabled(selected.count==batch.items.count)
+                Button("Clear selection") {m.batchSelected.subtract(batch.items.map(\.id))}.disabled(selected.isEmpty)
+                Spacer()
+                Text("\(selected.count) of \(batch.items.count) selected").font(.caption).foregroundStyle(.secondary)
             }
             ScrollView {LazyVGrid(columns:[GridItem(.flexible()),GridItem(.flexible())],alignment:.leading,spacing:12) {
                 ForEach(batch.items) {item in
