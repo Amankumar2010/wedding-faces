@@ -56,6 +56,8 @@ flowchart LR
 
 ## Quick start
 
+[Full installation guide and verified Beta 2 test results](docs/INSTALLATION.md).
+
 Requires macOS 14 or later, Python 3.12, and Apple's Command Line Tools (`xcode-select --install`). Apple Silicon is the development target; other configurations have not been validated.
 
 ```sh
@@ -67,7 +69,7 @@ open 'Wedding Faces Beta.app'
 
 Setup downloads Python dependencies and checksum-verified OpenCV models. Keep the app beside the source files, `.venv`, and `models` directory. This is a source-based beta, not a standalone, notarized download or Mac App Store release.
 
-Choose your photo folder, try the 100-photo sample, then scan the collection. Use Improve grouping, Batch review, or Review pairs to correct suggestions. Recognition is imperfect: lighting, profiles, blur, and small faces can split one person into many groups. Review before exporting. This release uses SFace only; experimental research models are not included.
+Choose your photo folder, try the 100-photo sample, then scan the collection. If the sidebar looks empty despite detected faces, choose **All** or **Small groups**; **People** hides unnamed groups with fewer than five photos. Use Improve grouping, Batch review, or Review pairs to correct suggestions. Recognition is imperfect: lighting, profiles, blur, and small faces can split one person into many groups. Review before exporting. This release uses SFace only; experimental research models are not included.
 
 ## Privacy
 
